@@ -4,8 +4,9 @@ using UnityEngine;
 public class LinearMazeGenerator : MonoBehaviour
 {
     [Header("Stage Settings")]
-    public List<GameObject> stagePrefabs;
-    public float stageLength = 20f; // width of each stage
+    public GameObject fixedFirstStage;          // 👈 always used in slot 0
+    public List<GameObject> stagePrefabs;        // 👈 remaining stages
+    public float stageLength = 20f;
 
     void Start()
     {
@@ -14,23 +15,39 @@ public class LinearMazeGenerator : MonoBehaviour
 
     void GenerateMaze()
     {
-        // Create a copy so we don’t modify the original list
+        // Copy list so original isn't modified
         List<GameObject> shuffledStages = new List<GameObject>(stagePrefabs);
 
-        // Shuffle stages
+        // Shuffle remaining stages
         for (int i = 0; i < shuffledStages.Count; i++)
         {
             int randomIndex = Random.Range(i, shuffledStages.Count);
-            GameObject temp = shuffledStages[i];
-            shuffledStages[i] = shuffledStages[randomIndex];
-            shuffledStages[randomIndex] = temp;
+            (shuffledStages[i], shuffledStages[randomIndex]) =
+                (shuffledStages[randomIndex], shuffledStages[i]);
         }
 
-        // Place stages in a row
-        for (int i = 0; i < shuffledStages.Count; i++)
+        int index = 0;
+
+        // 🔹 Place fixed stage FIRST
+        Instantiate(
+            fixedFirstStage,
+            new Vector3(index * stageLength, 0, 0),
+            Quaternion.identity,
+            transform
+        );
+
+        index++;
+
+        // 🔹 Place shuffled stages AFTER
+        foreach (GameObject stage in shuffledStages)
         {
-            Vector3 position = new Vector3(i * stageLength, 0, 0);
-            Instantiate(shuffledStages[i], position, Quaternion.identity, transform);
+            Instantiate(
+                stage,
+                new Vector3(index * stageLength, 0, 0),
+                Quaternion.identity,
+                transform
+            );
+            index++;
         }
     }
 }
