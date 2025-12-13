@@ -1,0 +1,4 @@
+repository "basic platformer test area/basic platformer test area@2475874742289@cloud"
+  path "/"
+    br "/main"
+    co "/main"
