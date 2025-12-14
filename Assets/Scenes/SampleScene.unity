@@ -443,6 +443,7 @@ GameObject:
   - component: {fileID: 1470396400}
   - component: {fileID: 1470396399}
   - component: {fileID: 1470396401}
+  - component: {fileID: 1470396402}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -484,7 +485,7 @@ Transform:
   m_GameObject: {fileID: 1470396397}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -507,13 +508,29 @@ MonoBehaviour:
   playerCamera: {fileID: 330585545}
   walkSpeed: 6
   runSpeed: 12
-  jumpPower: 7
-  gravity: 10
+  jumpPower: 10
+  gravity: 20
   lookSpeed: 2
   lookXLimit: 90
   defaultHeight: 2
   crouchHeight: 1
   crouchSpeed: 3
+--- !u!114 &1470396402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470396397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6528d222dc93543bbe1c0d4b037ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  dashSpeed: 20
+  dashDuration: 0.4
+  dashCooldown: 1
+  cameraTransform: {fileID: 0}
 --- !u!1 &1604668584
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,8 +674,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e7ad791afed0364fa797cae5adc59ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LinearMazeGenerator
+  fixedFirstStage: {fileID: 1904349690719558489, guid: beeab151d0a5f6c4898d95d1bcd9a8f8, type: 3}
   stagePrefabs:
-  - {fileID: 1904349690719558489, guid: beeab151d0a5f6c4898d95d1bcd9a8f8, type: 3}
+  - {fileID: 1904349690719558489, guid: 805c3087fc4af1a4e81d63d090d95410, type: 3}
   - {fileID: 3486069485750874918, guid: 81b5da7383cb9554591c71369ce1d0fb, type: 3}
   - {fileID: 146526807570818095, guid: 83cbb52990c2f5548b66f5775230cbd0, type: 3}
   stageLength: 30
